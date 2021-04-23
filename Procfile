@@ -1,1 +1,1 @@
-web: gunicorn myproject.wsgi
+web: gunicorn polling_app.wsgi --log-file -
