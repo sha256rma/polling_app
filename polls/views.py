@@ -1,8 +1,19 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from .models import Question, Choice
+from .serializers import QuestionSerializer, ChoiceSerializer
+from rest_framework import viewsets
 
-from .models import Choice, Question
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    serializer_class = QuestionSerializer
+    queryset = Question.objects.all()
+
+
+class ChoiceViewSet(viewsets.ModelViewSet):
+    serializer_class = ChoiceSerializer
+    queryset = Choice.objects.all()
 
 
 def index(request):

@@ -15,13 +15,20 @@ Including another URLconf
 """
 import debug_toolbar
 from django.urls import include, path
-
+from rest_framework.routers import DefaultRouter
 from . import views
+from polls.views import QuestionViewSet, ChoiceViewSet
+
+router = DefaultRouter()
+
+router.register(r'question', QuestionViewSet, basename='question')
+router.register(r'choice', ChoiceViewSet, basename='choice')
 
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('polls/', include('polls.urls')),
+    path('api/polls/', include(router.urls)),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 

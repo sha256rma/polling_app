@@ -2,12 +2,12 @@ from rest_framework import serializers
 from .models import Choice, Question
 
 
-class QuestionSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    content = serializers.CharField(max_length=200)
-    created = serializers.DateTimeField()
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['id', 'question_text', 'pub_date']
 
-class ChoiceSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    content = serializers.CharField(max_length=200)
-    created = serializers.DateTimeField()
+class ChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Choice
+        fields = ['id', 'question', 'choice_text', 'votes']
